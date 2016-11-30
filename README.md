@@ -1,3 +1,5 @@
+[![Travis Build Status](https://travis-ci.org/GoogleChrome/payment-request-shim.svg?branch=master)](https://travis-ci.org/GoogleChrome/payment-request-shim) [![Coverage Status](https://coveralls.io/repos/github/GoogleChrome/payment-request-shim/badge.svg?branch=master)](https://coveralls.io/github/GoogleChrome/payment-request-shim?branch=master) [![Dependency Status](https://david-dm.org/googlechrome/payment-request-shim.svg)](https://david-dm.org/googlechrome/payment-request-shim) [![devDependency Status](https://david-dm.org/googlechrome/payment-request-shim/dev-status.svg)](https://david-dm.org/googlechrome/payment-request-shim#info=devDependencies)
+
 # Payment Request API shim
 
 This is a pre-emptive shim to take care of changes to the Payment Request API
