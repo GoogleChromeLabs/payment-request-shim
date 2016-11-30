@@ -42,6 +42,6 @@ module.exports = (window, navigator) => {
 
   const regexResult = regexCheck.exec(userAgent);
   if (regexResult !== null) {
-    delete window.PaymentRequest;
+    window.PaymentRequest = null;
   }
 };

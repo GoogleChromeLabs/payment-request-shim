@@ -17,7 +17,7 @@ const getBundle = () => {
 
 gulp.task('build:unminified', () => {
   return getBundle()
-  .pipe(source('shim.js'))
+  .pipe(source('payment-shim.debug.js'))
   .pipe(gulp.dest(`${global.gulpConfig.dest}`));
 });
 
@@ -27,7 +27,7 @@ gulp.task('build:minified', () => {
   .pipe(buffer())
   .pipe(sourcemaps.init({loadMaps: true}))
   .pipe(uglify())
-  .pipe(rename({extname: '.min.js'}))
+  .pipe(rename({basename: 'payment-shim', extname: '.js'}))
   .pipe(sourcemaps.write('./'))
   .pipe(gulp.dest(`${global.gulpConfig.dest}`));
 });
