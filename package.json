@@ -1,7 +1,14 @@
 {
   "name": "payment-request-shim",
   "version": "1.0.0",
-  "description": "A shim to handle changes to the PaymentRequest API for
-  two milestones of Chrome.",
-  "license": "Apache-2.0"
+  "description": "A shim to handle changes to the PaymentRequest API for two milestones of Chrome.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "lint": "eslint '.'",
+    "test": "npm run lint"
+  },
+  "devDependencies": {
+    "eslint": "^3.11.1",
+    "eslint-config-google": "^0.7.1"
+  }
 }
