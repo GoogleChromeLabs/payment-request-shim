@@ -14,5 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// At the moment this file does nothing, but at the PaymentRequest
-// API matures, this will protect developers for two Chrome milestones.
+const androidWebview = require('./interventions/android-webview-54');
+
+androidWebview(window, navigator);
