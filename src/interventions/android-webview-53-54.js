@@ -33,15 +33,12 @@ limitations under the License.
  */
 
 module.exports = (window, navigator) => {
-  if (!window.PaymentRequest) {
-    return;
-  }
-
   const userAgent = navigator.userAgent;
-  const regexCheck = /.*\(.*; wv\).*Chrome\/54\.\d.*/g;
+  const regexCheck = /.*\(.*; wv\).*Chrome\/(?:53|54)\.\d.*/g;
 
   const regexResult = regexCheck.exec(userAgent);
   if (regexResult !== null) {
-    delete window.PaymentRequest;
+    window.PaymentRequest = null;
+    window.PaymentAddress = null;
   }
 };

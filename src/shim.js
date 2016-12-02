@@ -14,14 +14,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-const androidWebview = require('./interventions/android-webview-54');
-const toJSONShim = require('./interventions/to-json-53-54');
+const androidWebview = require('./interventions/android-webview-53-54');
+const toJSONShim = require('./interventions/to-json');
 
-console.log('Hello. 1?');
-
-if (window.PaymentResponse) {
-  console.log('Hello. 2?');
+const initShim = () => {
+  if (!window.PaymentResponse) {
+    // Nothing to shim;
+    return;
+  }
 
   androidWebview(window, navigator);
   toJSONShim(window, navigator);
-}
+};
+
+initShim();
