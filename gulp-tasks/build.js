@@ -9,7 +9,7 @@ const sourcemaps = require('gulp-sourcemaps');
 
 const getBundle = () => {
   return browserify({
-    entries: [`${global.gulpConfig.src}/shim.js`]
+    entries: [`${global.gulpConfig.src}/shim.js`],
   })
   .transform(babelify.configure({presets: ['es2015']}))
   .bundle();

@@ -16,7 +16,7 @@ limitations under the License.
 
 'use strict';
 
-const androidWebViewIntervention = require('../src/interventions/android-webview-54.js');
+const androidWebViewIntervention = require('../src/interventions/android-webview-53-54.js');
 
 require('chai').should();
 
@@ -27,6 +27,8 @@ describe('Android WebView 54 Fix', function() {
     `Mozilla/5.0 (Linux; U; Android 4.1.1; en-gb; Build/KLP) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30`,
     `Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19`,
     `Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0`,
+    `Mozilla/5.0 (Linux; Android 7.0; Nexus 5X Build/N5D91L; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/52.0.2840.85 Mobile Safari/537.36`,
+    `Mozilla/5.0 (Linux; Android 7.0; Nexus 5X Build/N5D91L; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/55.0.2840.85 Mobile Safari/537.36`,
   ];
 
   NON_MATCHING_USER_AGENTS.forEach((userAgent, index) => {
@@ -46,14 +48,19 @@ describe('Android WebView 54 Fix', function() {
   });
 
   const MATCHING_USER_AGENTS = [
-    `Mozilla/5.0 (Linux; Android 7.0; Nexus 5X Build/N5D91L; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.0.2840.85 Mobile Safari/537.36`
+    `Mozilla/5.0 (Linux; Android 7.0; Nexus 5X Build/N5D91L; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.0.2840.85 Mobile Safari/537.36`,
+    `Mozilla/5.0 (Linux; Android 7.0; Nexus 5X Build/N5D91L; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/54.120.34556.456456 Mobile Safari/537.36`,
+    `Mozilla/5.0 (Linux; Android 7.0; Nexus 5X Build/N5D91L; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/53.0.2840.85 Mobile Safari/537.36`,
+    `Mozilla/5.0 (Linux; Android 7.0; Nexus 5X Build/N5D91L; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/53.987.234234.82342345 Mobile Safari/537.36`,
   ];
 
   MATCHING_USER_AGENTS.forEach((userAgent, index) => {
     it(`should match the userAgent 'MATCHING_USER_AGENTS[${index}]'`, function() {
       const injectedPaymentRequest = {};
+      const injectedPaymentAddress = {};
       let window = {
         PaymentRequest: injectedPaymentRequest,
+        PaymentAddress: injectedPaymentAddress,
       };
       let navigator = {
         userAgent: userAgent,
@@ -61,7 +68,8 @@ describe('Android WebView 54 Fix', function() {
 
       androidWebViewIntervention(window, navigator);
 
-      (typeof window.PaymentRequest).should.equal('undefined');
+      (window.PaymentRequest === null).should.equal(true);
+      (window.PaymentAddress === null).should.equal(true);
     });
   });
 });

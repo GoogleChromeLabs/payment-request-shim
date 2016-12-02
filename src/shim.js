@@ -14,6 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-const androidWebview = require('./interventions/android-webview-54');
+const androidWebview = require('./interventions/android-webview-53-54');
 
 androidWebview(window, navigator);
