@@ -15,5 +15,13 @@ limitations under the License.
 */
 
 const androidWebview = require('./interventions/android-webview-54');
+const toJSONShim = require('./interventions/to-json-53-54');
 
-androidWebview(window, navigator);
+console.log('Hello. 1?');
+
+if (window.PaymentResponse) {
+  console.log('Hello. 2?');
+
+  androidWebview(window, navigator);
+  toJSONShim(window, navigator);
+}
