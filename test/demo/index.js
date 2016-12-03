@@ -1,4 +1,4 @@
-/* globals PaymentRequest, PaymentResponse */
+/* globals PaymentRequest */
 
 // Details from: http://credit-card-generator.2-ee.com/q_working-fake-credit-cards.htm
 //
