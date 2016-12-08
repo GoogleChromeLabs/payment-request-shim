@@ -15,16 +15,5 @@ limitations under the License.
 */
 
 const androidWebview = require('./interventions/android-webview-53-54');
-const toJSONShim = require('./interventions/to-json');
 
-const initShim = () => {
-  if (!window.PaymentResponse) {
-    // Nothing to shim;
-    return;
-  }
-
-  androidWebview(window, navigator);
-  toJSONShim(window, navigator);
-};
-
-initShim();
+androidWebview(window, navigator);
