@@ -1,11 +1,24 @@
 [![Travis Build Status](https://travis-ci.org/GoogleChrome/payment-request-shim.svg?branch=master)](https://travis-ci.org/GoogleChrome/payment-request-shim) [![Dependency Status](https://david-dm.org/googlechrome/payment-request-shim.svg)](https://david-dm.org/googlechrome/payment-request-shim) [![devDependency Status](https://david-dm.org/googlechrome/payment-request-shim/dev-status.svg)](https://david-dm.org/googlechrome/payment-request-shim#info=devDependencies)
 
-# Payment Request API shim
+# Payment Request Shim
 
-This is a pre-emptive shim to take care of changes to the Payment Request API
-for two Chrome milestones.
+This shim is designed to mitigate the pains of keeping up to date with the living standard for the Payment Request API.
 
-This is intended to be used via a CDN and **NOT** used directly.
+> This is intended to be used via a CDN and **NOT** used directly.
+
+The goal will be to keep your code working for at least 2 major Chrome releases.
+
+For more details on the Payment Request API itself, please [see this guide](https://developers.google.com/web/fundamentals/discovery-and-monetization/payment-request/).
+
+## Usage
+
+To make use of the shim, simply add this script tag to your page *before* making use of the Payment Request API.
+
+    <script src="https://storage.googleapis.com/prshim/v1/payment-shim.js">
+
+## Current Interventions
+
+- Android WebView exposed the Payment Request API [by mistake](https://bugs.chromium.org/p/chromium/issues/detail?id=667069). The shim sets the API to null when this occurs.
 
 ## License
 
