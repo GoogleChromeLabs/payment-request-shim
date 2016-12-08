@@ -34,7 +34,19 @@ const injectedDetails = {
 const injectedMethodName = 'injected-method-name';
 const injectedPayerEmail = 'injected-email';
 const injectedPayerPhone = 'injected-phone';
-const injectedShippingAddress = 'injected-shipping-address';
+const injectedShippingAddress = {
+  country: 'injected-country',
+  region: 'injected-',
+  city: 'injected-city',
+  dependentLocality: 'injected-dependentLocality',
+  addressLine: 'injected-addressLine',
+  postalCode: 'injected-postalCode',
+  sortingCode: 'injected-sortingCode',
+  languageCode: 'injected-languageCode',
+  organization: 'injected-organization',
+  recipient: 'injected-recipient',
+  phone: 'injected-phone',
+};
 const injectedShippingOption = 'injected-shipping-options';
 
 class InjectedOldPaymentResponse {

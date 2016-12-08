@@ -20,11 +20,38 @@ limitations under the License.
  * This intervention adds toJSON to the PaymentResponse prototype on Chrome 54.
  */
 
+const shippingAddressToJSON = function(addr) {
+  if (!addr) {
+    return null;
+  }
+
+  const keys = [
+    'country',
+    'region',
+    'city',
+    'dependentLocality',
+    'addressLine',
+    'postalCode',
+    'sortingCode',
+    'languageCode',
+    'organization',
+    'recipient',
+    'phone',
+  ];
+
+  const dict = {};
+  keys.forEach((key) => {
+    dict[key] = addr[key];
+  });
+
+  return dict;
+};
+
 const toJSONShim = function() {
   const instrumentObject = {
     methodName: this.methodName,
     details: this.details,
-    shippingAddress: this.shippingAddress || null,
+    shippingAddress: shippingAddressToJSON(this.shippingAddress),
     shippingOption: this.shippingOption || null,
     payerEmail: this.payerEmail || null,
     payerPhone: this.payerPhone || null,
