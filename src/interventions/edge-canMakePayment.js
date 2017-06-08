@@ -1,5 +1,5 @@
 /**
-Copyright (c) Microsoft Corporation.
+Copyright 2016 Google Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -26,10 +26,32 @@ limitations under the License.
 
 const baseUrl = 'https://wallet.microsoft.com';
 const canMakePaymentUrl = `${baseUrl}/preview/canMakePayment`;
+const timeoutInMs = 30000;
 
-const canMakePaymentPolyfill = () => {
+function ready() {
+    // Ensure the document is ready.
     return new Promise((resolve, reject) => {
-        const body = document.getElementsByTagName('body')[0];
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', resolve);
+        } else {
+            resolve();
+        }
+    });
+}
+
+function timeout(ms) {
+    // Create a promise that rejects in <ms> milliseconds.
+    return new Promise((resolve, reject) => {
+        let id = setTimeout(() => {
+            clearTimeout(id);
+            reject(`canMakePayment timed out in ${ms} ms.`);
+        }, ms);
+    });
+}
+
+function canMakePayment() {
+    return new Promise((resolve, reject) => {
+        const body = document.body;
         const iframe = document.createElement('iframe');
         iframe.id = 'edge-canMakePayment-iframe';
         iframe.src = canMakePaymentUrl;
@@ -38,7 +60,7 @@ const canMakePaymentPolyfill = () => {
         iframe.style.height = '1px';
 
         const messageHandler = (event) => {
-            if (event.origin !== baseUrl) {
+            if (event.origin !== baseUrl || event.data.canMakePayment === undefined) {
                 return;
             }
 
@@ -59,7 +81,14 @@ const canMakePaymentPolyfill = () => {
         iframe.onerror = errorHandler;
         body.appendChild(iframe);
     });
-};
+}
+
+function canMakePaymentPolyfill() {
+    return ready()
+        .then(() => {
+            return Promise.race([canMakePayment(), timeout(timeoutInMs)]);
+        });
+}
 
 module.exports = (window, navigator) => {
     if (!window.PaymentRequest) {
