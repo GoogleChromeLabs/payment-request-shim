@@ -36,7 +36,7 @@ describe('Edge canMakePayment Shim', () => {
 
   it('should not override canMakePayment method', () => {
     let window = {
-      PaymentRequest: InjectedNewPaymentRequest
+      PaymentRequest: InjectedNewPaymentRequest,
     };
     let navigator = {
       userAgent: MATCHING_USER_AGENT,
@@ -52,10 +52,10 @@ describe('Edge canMakePayment Shim', () => {
 
   it(`should not add canMakePayment method when user agent is "${NON_MATCHING_USER_AGENT}"`, () => {
     let window = {
-      PaymentRequest: InjectedPaymentRequest
+      PaymentRequest: InjectedPaymentRequest,
     };
     let navigator = {
-      userAgent: NON_MATCHING_USER_AGENT
+      userAgent: NON_MATCHING_USER_AGENT,
     };
 
     edgeCanMakePaymentIntervention(window, navigator);
@@ -65,7 +65,7 @@ describe('Edge canMakePayment Shim', () => {
 
   it(`should add missing canMakePayment method when user agent is "${MATCHING_USER_AGENT}"`, () => {
     let window = {
-      PaymentRequest: InjectedPaymentRequest
+      PaymentRequest: InjectedPaymentRequest,
     };
     let navigator = {
       userAgent: MATCHING_USER_AGENT,

@@ -17,9 +17,13 @@ limitations under the License.
 /**
  * README
  *
- * This intervention adds canMakePayment to the PaymentRequest prototype on Microsoft Edge 40.15063.0.0.
- * The canMakePayment polyfill returns true if the logged in user has a card on file that is supported by Microsoft wallet; otherwise, returns false. 
- * Note: The payment instruments the user has on file are not mediated against the supported networks listed in the PaymentRequest methodData since this field is internal. 
+ * This intervention adds canMakePayment to the PaymentRequest prototype on
+ * Microsoft Edge 40.15063.0.0.
+ * The canMakePayment polyfill returns true if the logged in user has a card on
+ * file that is supported by Microsoft wallet; otherwise, returns false.
+ * Note: The payment instruments the user has on file are not mediated against
+ * the supported networks listed in the PaymentRequest methodData since this
+ * field is internal.
  */
 
 'use strict';
@@ -28,8 +32,11 @@ const baseUrl = 'https://wallet.microsoft.com';
 const canMakePaymentUrl = `${baseUrl}/preview/canMakePayment`;
 const timeoutInMs = 30000;
 
+/**
+ * Ensure the document is ready.
+ * @return {Promise}
+ */
 function ready() {
-    // Ensure the document is ready.
     return new Promise((resolve, reject) => {
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', resolve);
@@ -39,8 +46,12 @@ function ready() {
     });
 }
 
+/**
+ * Create a promise that rejects in <ms> milliseconds.
+ * @param {number}  ms - timeout in milliseconds.
+ * @return {Promise}
+ */
 function timeout(ms) {
-    // Create a promise that rejects in <ms> milliseconds.
     return new Promise((resolve, reject) => {
         let id = setTimeout(() => {
             clearTimeout(id);
@@ -49,6 +60,11 @@ function timeout(ms) {
     });
 }
 
+/**
+ * The canMakePayment function returns true if the logged in user has a card on
+ * file that is supported by Microsoft wallet; otherwise, returns false.
+ * @return {Promise}
+ */
 function canMakePayment() {
     return new Promise((resolve, reject) => {
         const body = document.body;
@@ -60,7 +76,8 @@ function canMakePayment() {
         iframe.style.height = '1px';
 
         const messageHandler = (event) => {
-            if (event.origin !== baseUrl || event.data.canMakePayment === undefined) {
+            if (event.origin !== baseUrl ||
+                event.data.canMakePayment === undefined) {
                 return;
             }
 
@@ -83,6 +100,12 @@ function canMakePayment() {
     });
 }
 
+/**
+ * The canMakePayment polyfill returns true if the logged in user has a card on
+ * file that is supported by Microsoft wallet; otherwise, returns false.
+ * Rejects if the canMakePayment promise is not resolved in the alloted timeout.
+ * @return {Promise}
+ */
 function canMakePaymentPolyfill() {
     return ready()
         .then(() => {

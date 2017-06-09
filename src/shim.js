@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 const androidWebview = require('./interventions/android-webview-53-54');
-const edgeCanMakePaymentIntervention = require('./interventions/edge-canMakePayment');
+const edgeCanMakePayment = require('./interventions/edge-canMakePayment');
 
 androidWebview(window, navigator);
-edgeCanMakePaymentIntervention(window, navigator);
+edgeCanMakePayment(window, navigator);
