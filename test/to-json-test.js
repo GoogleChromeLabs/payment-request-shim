@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/* eslint require-jsdoc: "off" */
 'use strict';
 
 const toJSONIntervention = require('../src/interventions/to-json.js');
