@@ -15,5 +15,7 @@ limitations under the License.
 */
 
 const androidWebview = require('./interventions/android-webview-53-54');
+const chromeIos = require('./interventions/chrome-ios-59');
 
 androidWebview(window, navigator);
+chromeIos(window, navigator);
