@@ -19,6 +19,7 @@ To make use of the shim, simply add this script tag to your page *before* making
 ## Current Interventions
 
 - Android WebView exposed the Payment Request API [by mistake](https://bugs.chromium.org/p/chromium/issues/detail?id=667069). The shim sets the API to null when this occurs.
+- Chrome for iOS exposed the Payment Request API [by mistake](https://bugs.chromium.org/p/chromium/issues/detail?id=734586). The shim sets the API to null when this occurs.
 
 ## License
 
