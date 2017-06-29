@@ -20,6 +20,8 @@ To make use of the shim, simply add this script tag to your page *before* making
 
 - Android WebView exposed the Payment Request API [by mistake](https://bugs.chromium.org/p/chromium/issues/detail?id=667069). The shim sets the API to null when this occurs.
 - Chrome for iOS exposed the Payment Request API [by mistake](https://bugs.chromium.org/p/chromium/issues/detail?id=734586). The shim sets the API to null when this occurs.
+- Add canMakePayment polyfill to the PaymentRequest prototype on Microsoft Edge. The polyfill returns true if the logged in user has a card on file that is supported by the platform; otherwise, returns false.
+  Note that the cards on file are not mediated against the supported networks listed in the PaymentRequest methodData.
 
 ## License
 
