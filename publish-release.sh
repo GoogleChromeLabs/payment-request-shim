@@ -21,7 +21,7 @@ gcloud config set project $BUCKET_NAME
 # Commit projects to the repo
 for buildFile in ${BUILD_FILES[@]}
 do
-  gsutil cp "build/$buildFile" "gs://$BUCKET_NAME/$VERSION/"
+  gsutil cp "build/$buildFile" "gs://$BUCKET_NAME/$VERSION/$buildFile"
 done
 
 gsutil acl set -r public-read "gs://$BUCKET_NAME/$VERSION/"
