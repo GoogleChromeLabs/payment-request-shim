@@ -1,7 +1,10 @@
 #!/bin/bash
 
 VERSION="v1"
-CLOUD_PROJECT="prshim"
+BUCKET_NAME="prshim"
+BUILD_FILES[0]="payment-shim.debug.js"
+BUILD_FILES[1]="payment-shim.js"
+BUILD_FILES[2]="payment-shim.js.map"
 
 npm install
 gulp build
@@ -13,8 +16,12 @@ gulp build
 # gcloud auth login
 
 # Ensure gcloud is pointing to the correct project
-gcloud config set project $CLOUD_PROJECT
+gcloud config set project $BUCKET_NAME
 
 # Commit projects to the repo
-gsutil cp build/* "gs://$CLOUD_PROJECT/$VERSION/"
-gsutil acl set public-read "gs://$CLOUD_PROJECT/$VERSION/*"
+for buildFile in ${BUILD_FILES[@]}
+do
+  gsutil cp "build/$buildFile" "gs://$BUCKET_NAME/$VERSION/"
+done
+
+gsutil acl set -r public-read "gs://$BUCKET_NAME/$VERSION/"
