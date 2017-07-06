@@ -10,6 +10,7 @@ node_js:
 
 install:
   - npm install
+  - curl https://sdk.cloud.google.com | bash;
 
 # Read more here: https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-a-GUI
 before_script:
@@ -20,3 +21,6 @@ before_script:
 script:
   - gulp
   - npm run test
+  - if [[ $TRAVIS_BRANCH == "master" && $TRAVIS_PULL_REQUEST = "false" ]]; then
+    ./publish-release.sh
+  fi

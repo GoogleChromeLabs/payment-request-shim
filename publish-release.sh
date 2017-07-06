@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Before running this script, log in to gcloud with service account or 
+# manually with one of the following commands:
+#   gcloud auth activate-service-account --key-file client-secret.json
+#   gcloud auth login
+
 # Stop running if any of the commands return a non-zero status code.
 set -e
 
@@ -17,12 +22,6 @@ npm run test
 
 # Build the project before releasing
 gulp build
-
-# Log in to gcloud with service account or manually with one of the following
-# commands:
-
-# gcloud auth activate-service-account --key-file client-secret.json
-# gcloud auth login
 
 # Ensure gcloud is pointing to the correct project
 gcloud config set project $BUCKET_NAME
