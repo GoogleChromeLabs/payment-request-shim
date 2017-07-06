@@ -1,12 +1,21 @@
 #!/bin/bash
 
+# Stop running if any of the commands return a non-zero status code.
+set -e
+
 VERSION="v1"
 BUCKET_NAME="prshim"
 BUILD_FILES[0]="payment-shim.debug.js"
 BUILD_FILES[1]="payment-shim.js"
 BUILD_FILES[2]="payment-shim.js.map"
 
+# First install dependencies
 npm install
+
+# Run tests to ensure everything is working
+npm run test
+
+# Build the project before releasing
 gulp build
 
 # Log in to gcloud with service account or manually with one of the following
