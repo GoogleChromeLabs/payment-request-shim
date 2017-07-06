@@ -10,6 +10,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const getBundle = () => {
   return browserify({
     entries: [`${global.gulpConfig.src}/shim.js`],
+    debug: true,
   })
   .transform(babelify.configure({presets: ['es2015']}))
   .bundle();
@@ -25,7 +26,7 @@ gulp.task('build:minified', () => {
   return getBundle()
   .pipe(source('shim.js'))
   .pipe(buffer())
-  .pipe(sourcemaps.init({loadMaps: true}))
+  .pipe(sourcemaps.init())
   .pipe(uglify())
   .pipe(rename({basename: 'payment-shim', extname: '.js'}))
   .pipe(sourcemaps.write('./'))
