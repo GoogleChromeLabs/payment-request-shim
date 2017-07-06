@@ -6,5 +6,6 @@
   "rules": {
     "max-len": 0,
     "no-console": 0,
+    "require-jsdoc": 0,
   }
 }
