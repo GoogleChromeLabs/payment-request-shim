@@ -107,6 +107,14 @@ function canMakePayment() {
  * @return {Promise}
  */
 function canMakePaymentPolyfill() {
+    /* eslint-disable no-console */
+    console.log('canMakePayment() is polyfilled. The polyfill returns true ' +
+        'if the logged in user has a card on file that is supported by the ' +
+        'platform; otherwise, returns false.  The cards on file are ' +
+        'currently not mediated against the supported networks listed in the ' +
+        'PaymentRequest methodData.');
+    /* eslint-enable no-console */
+
     return ready()
         .then(() => {
             return Promise.race([canMakePayment(), timeout(timeoutInMs)]);
