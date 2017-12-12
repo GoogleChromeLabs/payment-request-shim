@@ -45,31 +45,17 @@ function convertPaymentCurrencyAmount(amount) {
 
 /**
  * Converts PaymentCurrencyAmount.value instances from number to string inside
- * instances of PaymentItem, if any.
- * @param {(Array<!window.PaymentItem>|undefined)} displayItems
+ * instances of PaymentShippingOption or PaymentItem, if any.
+ * @param {(Array<!window.PaymentShippingOption|!window.PaymentItem>|undefined)}
+ *     items
  */
-function convertDisplayItems(displayItems) {
-  if (!displayItems || !(displayItems instanceof Array)) {
+function convertDisplayItemsOrShippingOptions(items) {
+  if (!items || !(items instanceof Array)) {
     return;
   }
 
-  for (let i = 0; i < displayItems.length; i++) {
-    convertPaymentCurrencyAmount(displayItems[i].amount);
-  }
-}
-
-/**
- * Converts PaymentCurrencyAmount.value instances from number to string inside
- * instances of PaymentShippingOption, if any.
- * @param {(Array<!window.PaymentShippingOption>|undefined)} shippingOptions
- */
-function convertShippingOptions(shippingOptions) {
-  if (!shippingOptions || !(shippingOptions instanceof Array)) {
-    return;
-  }
-
-  for (let i = 0; i < shippingOptions.length; i++) {
-    convertPaymentCurrencyAmount(shippingOptions[i].amount);
+  for (let i = 0; i < items.length; i++) {
+    convertPaymentCurrencyAmount(items[i].amount);
   }
 }
 
@@ -86,8 +72,8 @@ function convertPaymentDetails(details) {
   if (details.total) {
     convertPaymentCurrencyAmount(details.total.amount);
   }
-  convertDisplayItems(details.displayItems);
-  convertShippingOptions(details.shippingOptions);
+  convertDisplayItemsOrShippingOptions(details.displayItems);
+  convertDisplayItemsOrShippingOptions(details.shippingOptions);
   convertPaymentDetailsModifiers(details.modifiers);
 }
 
@@ -105,7 +91,7 @@ function convertPaymentDetailsModifiers(modifiers) {
     if (modifiers[i].total) {
       convertPaymentCurrencyAmount(modifiers[i].total.amount);
     }
-    convertDisplayItems(modifiers[i].additionalDisplayItems);
+    convertDisplayItemsOrShippingOptions(modifiers[i].additionalDisplayItems);
   }
 }
 
