@@ -61,24 +61,6 @@ function convertDisplayItemsOrShippingOptions(items) {
 
 /**
  * Converts PaymentCurrencyAmount.value instances from number to string inside
- * an instance of PaymentDetails, if any.
- * @param {(window.PaymentDetails|undefined)} details
- */
-function convertPaymentDetails(details) {
-  if (!details) {
-    return;
-  }
-
-  if (details.total) {
-    convertPaymentCurrencyAmount(details.total.amount);
-  }
-  convertDisplayItemsOrShippingOptions(details.displayItems);
-  convertDisplayItemsOrShippingOptions(details.shippingOptions);
-  convertPaymentDetailsModifiers(details.modifiers);
-}
-
-/**
- * Converts PaymentCurrencyAmount.value instances from number to string inside
  * instances of PaymentDetailsModifier, if any.
  * @param {(Array<!window.PaymentDetailsModifier>|undefined)} modifiers
  */
@@ -93,6 +75,24 @@ function convertPaymentDetailsModifiers(modifiers) {
     }
     convertDisplayItemsOrShippingOptions(modifiers[i].additionalDisplayItems);
   }
+}
+
+/**
+ * Converts PaymentCurrencyAmount.value instances from number to string inside
+ * an instance of PaymentDetails, if any.
+ * @param {(window.PaymentDetails|undefined)} details
+ */
+function convertPaymentDetails(details) {
+  if (!details) {
+    return;
+  }
+
+  if (details.total) {
+    convertPaymentCurrencyAmount(details.total.amount);
+  }
+  convertDisplayItemsOrShippingOptions(details.displayItems);
+  convertDisplayItemsOrShippingOptions(details.shippingOptions);
+  convertPaymentDetailsModifiers(details.modifiers);
 }
 
 module.exports = (window, navigator) => {
