@@ -1,4 +1,4 @@
-[![Travis Build Status](https://travis-ci.org/GoogleChrome/payment-request-shim.svg?branch=master)](https://travis-ci.org/GoogleChrome/payment-request-shim) [![Dependency Status](https://david-dm.org/googlechrome/payment-request-shim.svg)](https://david-dm.org/googlechrome/payment-request-shim) [![devDependencies Status](https://david-dm.org/googlechrome/payment-request-shim/dev-status.svg)](https://david-dm.org/googlechrome/payment-request-shim?type=dev)
+[![Travis Build Status](https://travis-ci.org/GoogleChromeLabs/payment-request-shim.svg?branch=master)](https://travis-ci.org/GoogleChromeLabs/payment-request-shim) [![Dependency Status](https://david-dm.org/googlechromelabs/payment-request-shim.svg)](https://david-dm.org/googlechromelabs/payment-request-shim) [![devDependencies Status](https://david-dm.org/googlechromelabs/payment-request-shim/dev-status.svg)](https://david-dm.org/googlechromelabs/payment-request-shim?type=dev)
 
 # Payment Request Shim
 
