@@ -80,8 +80,8 @@
   };
 
   // Clone details to use as the updateWith() method argument.
-  let addressUpdateDetails = JSON.parse(JSON.stringify(details));
-  let optionUpdateDetails = JSON.parse(JSON.stringify(details));
+  var addressUpdateDetails = JSON.parse(JSON.stringify(details));
+  var optionUpdateDetails = JSON.parse(JSON.stringify(details));
 
   var request = new PaymentRequest(supportedInstruments, details, options);
 
