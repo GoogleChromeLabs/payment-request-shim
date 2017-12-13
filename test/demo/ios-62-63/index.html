@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="/build/payment-shim.js"></script>
+<script type="text/javascript">
+  var supportedInstruments = [{
+        supportedMethods: [
+            'basic-card',
+        ]
+    }];
+
+  var details = {
+      total: {
+          label: 'Total',
+          amount: {
+              currency: 'USD',
+              value: 55
+          }
+      },
+      displayItems: [{
+          label: 'Total amount',
+          amount: {
+              currency: 'USD',
+              value: 65
+          }
+      }, {
+          label: 'Discount',
+          amount: {
+              currency: 'USD',
+              value: -10
+          }
+      }, {
+          label: 'Shipping',
+          amount: {
+              currency: 'USD',
+              value: 0
+          }
+      }],
+      shippingOptions: [{
+          id: 'standard',
+          label: 'Standard shipping',
+          amount: {
+              currency: 'USD',
+              value: 0.00
+          },
+          selected: true
+      }, {
+          id: 'expedited',
+          label: 'Expedited shipping',
+          amount: {
+              currency: 'USD',
+              value: 0.9999
+          },
+          selected: false
+      }],
+      modifiers: [{
+          supportedMethods: ['basic-card'],
+          total: {
+              label: 'Total',
+              amount: {
+                  currency: 'USD',
+                  value: 45.00
+              }
+          },
+          additionalDisplayItems: [{
+              label: 'Visa discount',
+              amount: {
+                  currency: 'USD',
+                  value: -10.00
+              }
+          }],
+          data: {
+              supportedNetworks: ['visa'],
+          }
+      }]
+  };
+
+  var options = {
+      requestShipping: true
+  };
+
+  // Clone details to use as the updateWith() method argument.
+  var addressUpdateDetails = JSON.parse(JSON.stringify(details));
+  var optionUpdateDetails = JSON.parse(JSON.stringify(details));
+
+  var request = new PaymentRequest(supportedInstruments, details, options);
+
+  request.addEventListener('shippingaddresschange', function(e) {
+      e.updateWith(new Promise(function(resolve) {
+          resolve(addressUpdateDetails);
+      }));
+  });
+
+  request.addEventListener('shippingoptionchange', function(e) {
+      e.updateWith(new Promise(function(resolve) {
+          resolve(optionUpdateDetails);
+      }));
+  });
+
+  request.show()
+      .then(function(response) {
+          response.complete('success');
+      })
+      .catch(function(err) {
+          console.error(err);
+      });
+</script>
+</head>
+<body>
+  <p>
+    Tests whether numbers are successfully converted to strings in PaymentDetails.
+  </p>
+  <p>
+    Payment Request UI must show. User should be able to change the shipping
+    address and shipping option (selected shipping option won't really change).
+  </p>
+</body>
