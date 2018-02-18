@@ -53,11 +53,11 @@ module.exports = (window, navigator) => {
   const versionCheck = /.*Chrome\/(?:63|64|65)\.\d.*/g;
   const regexResult = versionCheck.exec(userAgent);
   if (regexResult !== null) {
-    var fs = window.RequestFileSystem || window.webkitRequestFileSystem;
+    const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
     if (fs) {
       fs(window.TEMPORARY,
          100,
-         function(){},
+         function() {},
          disablePaymentRequest);
     }
   }
