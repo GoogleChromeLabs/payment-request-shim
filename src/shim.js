@@ -15,11 +15,13 @@ limitations under the License.
 */
 
 const androidWebview = require('./interventions/android-webview-53-54');
+const chromeIncognito = require('./interventions/chrome-incognito');
 const chromeIos59 = require('./interventions/chrome-ios-59');
 const chromeIos6263 = require('./interventions/chrome-ios-62-63');
 const edgeCanMakePayment = require('./interventions/edge-canMakePayment');
 
 androidWebview(window, navigator);
+chromeIncognito(window, navigator);
 chromeIos59(window, navigator);
 chromeIos6263(window, navigator);
 edgeCanMakePayment(window, navigator);
