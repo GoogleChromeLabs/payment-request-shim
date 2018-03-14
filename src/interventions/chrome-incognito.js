@@ -32,8 +32,8 @@ limitations under the License.
  * Disables Payment Request.
  */
 function disablePaymentRequest() {
-    delete window.PaymentRequest;
-    delete window.PaymentAddress;
+  delete window.PaymentRequest;
+  delete window.PaymentAddress;
 }
 
 module.exports = (window, navigator) => {
