@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const rename = require('gulp-rename');
 const uglify = require('gulp-uglify');
+const gzip = require('gulp-gzip');
 const babelify = require('babelify');
 const browserify = require('browserify');
 const source = require('vinyl-source-stream');
@@ -30,6 +31,7 @@ gulp.task('build:minified', () => {
   .pipe(uglify())
   .pipe(rename({basename: 'payment-shim', extname: '.js'}))
   .pipe(sourcemaps.write('./'))
+  .pipe(gzip({append: false}))
   .pipe(gulp.dest(`${global.gulpConfig.dest}`));
 });
 
